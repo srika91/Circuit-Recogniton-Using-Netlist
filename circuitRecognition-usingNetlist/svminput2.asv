@@ -1,0 +1,24 @@
+clc;
+clear all;
+n=6;
+m=4;
+
+ jpgFiles = dir('C:\Users\kalki\Documents\MATLAB\Mu\*.jpg')
+for i = 1:length(jpgFiles)
+filename = jpgFiles(i).name;
+I = imread(filename);
+p=logical(not(I));
+
+    [C(i,1),S(i,1)] = wavedec2(a,1,'haar');
+[cA(i,1),cH(i,1),cV(i,1),cD(i,1)] = dwt2(a,'haar');
+A(i,1) = appcoef2(C,S,'haar',1);
+   
+end
+%   dlmwrite('xmoments.txt',x, ...
+%         'newline', 'pc');
+    dlmwrite('Cvalues.txt',C,'newline', 'pc'); 
+      dlmwrite('cA.txt',cA,'newline', 'pc');
+
+dlmwrite('cH.txt',cH,'newline', 'pc'); 
+dlmwrite('cV.txt',cV,'newline', 'pc'); 
+dlmwrite('cD.txt',cD,'newline', 'pc'); 

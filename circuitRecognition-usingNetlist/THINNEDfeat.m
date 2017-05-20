@@ -1,0 +1,66 @@
+
+clc;
+clear all;
+
+
+ jpgFiles = dir('*.jpg')
+  
+for i = 1:length(jpgFiles)
+filename = jpgFiles(i).name;
+a = imread(filename);
+
+a1=imresize(im2bw(a),[64 nan]);
+a2=imresize(im2bw(a),[100 nan]);
+a1=bwmorph(a1,'thin',inf);
+a2=bwmorph(a2,'thin',inf);
+
+
+[a11,a12,a13,a14]=edge(a1,'sobel');
+[a21,a22,a23,a24]=edge(a2,'sobel');
+
+[q11,q12,q13,q14]=edge(a1,'roberts');
+[w21,w22,w23,w24]=edge(a2,'roberts');
+
+
+dlmwrite('vertical64.txt',sum(a13,1),'-append','newline', 'pc');
+dlmwrite('vertical100.txt',sum(a23,1),'-append','newline', 'pc');
+dlmwrite('diagonal64.txt',sum(q13,1),'-append','newline', 'pc');
+dlmwrite('diagonal100.txt',sum(w23,1),'-append','newline', 'pc');
+
+dlmwrite('horizontal64.txt',sum(a14,2)','-append','newline', 'pc');
+dlmwrite('horizontal100.txt',sum(a24,2)','-append','newline', 'pc');
+dlmwrite('antidiagonal64.txt',sum(q14,1),'-append','newline', 'pc');
+dlmwrite('antidiagonal100.txt',sum(w24,1),'-append','newline', 'pc');
+
+
+a9=im2bw(a);
+% q=zeros(400);
+% w=zeros(400);
+% 
+% [q1,w1]=find(a9==1);
+% qq=size(q1);
+% ww=size(w1);
+% q=q1;
+% w=w1;
+% for i=qq+1:1:400
+%     q(i)=0;
+% end
+% 
+% for i=qq+1:1:400
+%     w(i)=0;
+% end
+r(1,:)=a9(:);    
+%vv=[q' w'];
+%dlmwrite('coordinatesthinned.txt',vv,'-append','newline', 'pc');
+dlmwrite('coodbinaryTHIN.txt',r,'-append','newline', 'pc');
+dlmwrite('VPPTHIN28.txt',sum(a9,2)','-append','newline', 'pc');
+dlmwrite('HPPTHIN28.txt',sum(a9,1),'-append','newline', 'pc');
+dlmwrite('VPPTHIN64.txt',sum(a1,2)','-append','newline', 'pc');
+dlmwrite('HPPTHIN64.txt',sum(a1,1),'-append','newline', 'pc');
+dlmwrite('VPPTHIN100.txt',sum(a2,2)','-append','newline', 'pc');
+dlmwrite('HPPTHIN100.txt',sum(a2,1),'-append','newline', 'pc');
+
+
+
+
+end

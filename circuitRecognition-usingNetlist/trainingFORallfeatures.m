@@ -1,0 +1,122 @@
+
+
+clc;
+jpgFiles = dir('*.jpg');
+for j = 1:length(jpgFiles)
+filename = jpgFiles(j).name;
+I = imread(filename);
+I=im2bw(I);
+[qq,qw,qv,qh]=edge(I,'sobel');
+ve=imresize(qv,.5);
+ho=imresize(qh,.5);
+vertical=reshape(ve,1,196);
+horizontal=reshape(ho,1,196);
+[gw,gt,g45,g135]=edge(I,'roberts');
+di=imresize(g45,.5);
+andi=imresize(g135,.5);
+diagonal=reshape(di,1,196);
+antidiagonal=reshape(andi,1,196);
+dlmwrite('vertical.txt',vertical,'-append','newline', 'pc');
+dlmwrite('horizontal.txt',horizontal,'-append','newline', 'pc');
+dlmwrite('diagonal.txt',diagonal,'-append','newline', 'pc');
+dlmwrite('antidiagonal.txt',antidiagonal,'-append','newline', 'pc');
+
+I1=bwmorph(I,'thin',inf);
+
+
+[qq1,qw1,qv1,qh1]=edge(I1,'sobel');
+ve1=imresize(qv1,.5);
+ho1=imresize(qh1,.5);
+vertical1=reshape(ve1,1,196);
+horizontal1=reshape(ho1,1,196);
+[gw1,gt1,g451,g1351]=edge(I1,'roberts');
+di1=imresize(g451,.5);
+andi1=imresize(g1351,.5);
+diagonal1=reshape(di1,1,196);
+antidiagonal1=reshape(andi1,1,196);
+dlmwrite('thinvertical.txt',vertical1,'-append','newline', 'pc');
+dlmwrite('thinhorizontal.txt',horizontal1,'-append','newline', 'pc');
+dlmwrite('thindiagonal.txt',diagonal1,'-append','newline', 'pc');
+dlmwrite('thinantidiagonal.txt',antidiagonal1,'-append','newline', 'pc');
+
+r2(1,:)=I(:);
+r1(1,:)=I1(:);
+dlmwrite('coodbinary.txt',r2,'-append','newline', 'pc');
+dlmwrite('thinnedcoodbinary.txt',r1,'-append','newline', 'pc');
+
+[C,S] = wavedec2(I,1,'db2');
+%[cA,cH,cV,cD] = dwt2(a,'haar');
+A= appcoef2(C,S,'db2',1);
+%[x,y]=size(A);
+vv(1,:)=A(:);
+
+dlmwrite('Abin.txt',vv,'-append','newline', 'pc');
+
+[C1,S1] = wavedec2(I1,1,'db2');
+%[cA,cH,cV,cD] = dwt2(a,'haar');
+A1= appcoef2(C1,S1,'db2',1);
+%[x,y]=size(A);
+vv1(1,:)=A1(:);
+
+dlmwrite('thinnedAbin.txt',vv1,'-append','newline', 'pc');
+
+
+
+dlmwrite('VPPTHIN28.txt',sum(I,2)','-append','newline', 'pc');
+dlmwrite('HPPTHIN28.txt',sum(I,1),'-append','newline', 'pc');
+dlmwrite('thinnedVPPTHIN28.txt',sum(I1,2)','-append','newline', 'pc');
+dlmwrite('thinnedHPPTHIN28.txt',sum(I1,1),'-append','newline', 'pc');
+
+
+
+
+
+n=10;
+m=4;
+pz=logical(not(I));
+[x(j) y(j) z(j)]=Zernikmoment(pz,n,m);
+
+n=10;
+m=4;
+pz1=logical(not(I1));
+[x1(j) y1(j) z1(j)]=Zernikmoment(pz1,n,m);
+
+n=14;
+m=4;
+pz2=logical(not(I1));
+[x2(j) y2(j) z2(j)]=Zernikmoment(pz2,n,m);
+
+n=14;
+m=4;
+pz3=logical(not(I));
+[x3(j) y3(j) z3(j)]=Zernikmoment(pz3,n,m);
+
+
+end
+
+
+dlmwrite('xmoments10.txt',x, ...
+         'newline', 'pc');
+dlmwrite('ymoments10.txt',y, ...
+         'newline', 'pc');   
+     
+     
+     
+     
+dlmwrite('thinnedxmoments10.txt',x1, ...
+         'newline', 'pc');
+dlmwrite('thinnedymoments10.txt',y1, ...
+         'newline', 'pc');        
+     
+dlmwrite('xmoments14.txt',x3, ...
+         'newline', 'pc');
+dlmwrite('ymoments14.txt',y3, ...
+         'newline', 'pc');   
+     
+     
+     
+     
+dlmwrite('thinnedxmoments14.txt',x2, ...
+         'newline', 'pc');
+dlmwrite('thinnedymoments14.txt',y2, ...
+         'newline', 'pc');             

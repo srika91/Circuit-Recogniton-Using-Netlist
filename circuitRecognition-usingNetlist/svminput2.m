@@ -1,0 +1,83 @@
+clc;
+clear all;
+n=6;
+m=4;
+
+ jpgFiles = dir('C:\Users\kalki\Documents\MATLAB\Mu\*.jpg')
+for i = 1:length(jpgFiles)
+filename = jpgFiles(i).name;
+I = imread(filename);
+p=logical(not(I));
+
+    [x1(1,i) y1(1,i) z1(1,i)]=Zernikmoment(p,n,m);
+   
+end
+%   dlmwrite('xmoments.txt',x, ...
+%         'newline', 'pc');
+    dlmwrite('ymoments2.txt',y1,'newline', 'pc'); 
+      dlmwrite('zmoments2.txt',z1,'newline', 'pc');
+%       jpgFiles = dir('C:\Users\kalki\Documents\MATLAB\mutest\*.jpg')
+% for i = 1:length(jpgFiles)
+% filename = jpgFiles(i).name;
+% I = imread(filename);
+% p=logical(not(I));
+% 
+%     [x1(1,i) y1(1,i) z1(1,i)]=Zernikmoment(p,n,m);
+%    
+% end
+% %   dlmwrite('xmoments.txt',x, ...
+% %         'newline', 'pc');
+%     dlmwrite('ymoments2.txt',y1,'newline', 'pc'); 
+%       dlmwrite('zmoments2.txt',z1,'newline', 'pc');
+%        jpgFiles = dir('C:\Users\kalki\Documents\MATLAB\Ohm\*.jpg')
+% for i = 1:length(jpgFiles)
+% filename = jpgFiles(i).name;
+% I = imread(filename);
+% p=logical(not(I));
+% 
+%     [x1(1,i) y1(1,i) z1(1,i)]=Zernikmoment(p,n,m);
+%    
+% end
+% %   dlmwrite('xmoments.txt',x, ...
+% %         'newline', 'pc');
+%     dlmwrite('ymoments2.txt',y1,'newline', 'pc'); 
+%       dlmwrite('zmoments2.txt',z1,'newline', 'pc');
+%        jpgFiles = dir('C:\Users\kalki\Documents\MATLAB\ohmtest\*.jpg')
+% for i = 1:length(jpgFiles)
+% filename = jpgFiles(i).name;
+% I = imread(filename);
+% p=logical(not(I));
+% 
+%     [x1(1,i) y1(1,i) z1(1,i)]=Zernikmoment(p,n,m);
+%    
+% end
+% %   dlmwrite('xmoments.txt',x, ...
+% %         'newline', 'pc');
+%     dlmwrite('ymoments2.txt',y1,'newline', 'pc'); 
+%       dlmwrite('zmoments2.txt',z1,'newline', 'pc');
+%        jpgFiles = dir('C:\Users\kalki\Documents\MATLAB\F\*.jpg')
+% for i = 1:length(jpgFiles)
+% filename = jpgFiles(i).name;
+% I = imread(filename);
+% p=logical(not(I));
+% 
+%     [x1(1,i) y1(1,i) z1(1,i)]=Zernikmoment(p,n,m);
+%    
+% end
+% %   dlmwrite('xmoments.txt',x, ...
+% %         'newline', 'pc');
+%     dlmwrite('ymoments2.txt',y1,'newline', 'pc'); 
+%       dlmwrite('zmoments2.txt',z1,'newline', 'pc');
+%        jpgFiles = dir('C:\Users\kalki\Documents\MATLAB\ftest\*.jpg')
+% for i = 1:length(jpgFiles)
+% filename = jpgFiles(i).name;
+% I = imread(filename);
+% p=logical(not(I));
+% 
+%     [x1(1,i) y1(1,i) z1(1,i)]=Zernikmoment(p,n,m);
+%    
+% end
+% %   dlmwrite('xmoments.txt',x, ...
+% %         'newline', 'pc');
+%     dlmwrite('ymoments2.txt',y1,'newline', 'pc'); 
+%       dlmwrite('zmoments2.txt',z1,'newline', 'pc');

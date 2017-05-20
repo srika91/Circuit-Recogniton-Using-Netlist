@@ -1,0 +1,35 @@
+v=imread('C:\Users\kalki\Pictures\complex3.bmp');
+
+
+for j=3:1:430
+    for i=3:1:230
+        if (v(i,j)== 1)
+          a(i,j+1)=1;
+          a(i,j-1)=1;
+          a(i-1,j)=1;
+          a(i,j-1)=1;
+          a(i-1,j-1)=1;
+          a(i+1,j+1)=1;
+          a(i-1,j+1)=1;
+          a(i+1,j-1)=1;
+          a(i,j+2)=1;
+          a(i,j-2)=1;
+          a(i,j-2)=1;
+          a(i-2,j-2)=1;
+          a(i+2,j+2)=1;
+          a(i-2,j+2)=1;
+          a(i+2,j-2)=1;
+        else
+             a(i,j)=0;
+            
+        end
+        
+        
+        
+    end
+end
+%a1=imfill(a);
+imshow(a);
+%figure,imshow(close);
+
+        
